@@ -1,0 +1,53 @@
+ <!-- 判断是否有菜谱 -->
+ <!-- 有菜谱时显示的内容 -->
+ <view class="hot-recipe-lists">
+ 	<!-- 菜谱列表 -->
+ 	<view class='hot-recipe-list' catchtap="toDetail" id="{{item._id}}" wx:for="{{searchList}}" wx:key="_id">
+ 		<!-- 菜谱图片 -->
+ 		<view class="recipeimage">
+ 			<image src="{{item.files[0]}}"></image>
+ 		</view>
+ 		<!-- 菜谱信息 -->
+ 		<view class="recipeinfo">
+ 			<!-- 菜谱名称 -->
+ 			<view class="recipename">
+ 				<text>{{item.menuName}}</text>
+ 			</view>
+ 			<view class="recipefooter">
+ 				<!-- 几星图片 ， 推荐度（关注度） / 3 来做 -->
+ 				<view class="xingxing">
+ 					<!-- 关注不足3个，没有星星  {{ item.tjcp/3 < 1 }}-->
+					 
+					<!-- 关注大于3个，小于6个，1个星星  {{ item.tjcp/3 >= 1 && item.tjcp/3 < 2 }}-->
+					<!-- 以此类推，小星星 {{ item.tjcp/3 >= 2 && item.tjcp/3 < 3 }} -->
+ 					<block>
+ 						<image wx:for="{{liangStar}}" src="/static/index/xingxing1.png" wx:key="*this" />
+ 					</block>
+ 					<block>
+ 						<image wx:for="{{darkStar}}" src="/static/index/xingxing0.png" wx:key="*this" />
+ 					</block>
+
+ 				</view>
+ 				<!-- 菜谱发布人信息 -->
+ 				<view class="recipedetail">
+ 					<image class="usernameimage" src="{{item.avatarUrl}}"></image>
+ 					<text>{{item.nickName}}</text>
+ 					<image class="tjimage" src="/static/index/tj.png"></image>
+ 					<text>{{item.follows}}</text>
+ 					<image class="hotimage" src="/static/index/hot.png"></image>
+ 					<text>{{item.views}}</text>
+ 				</view>
+ 			</view>
+
+ 		</view>
+ 	</view>
+
+ </view>
+ <!-- 没有菜谱时显示的内容 -->
+ <view class="tips" wx:if="{{searchList.length == 0}}">
+ 	暂时还没有朋友发布菜谱哦！！！
+ </view>
+ <!-- 滚动获取数据时，数据不够的情况 -->
+ <!-- <view class="tips">
+ 	已经没有数据啦！！！
+ </view> -->
